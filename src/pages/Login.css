@@ -1,0 +1,166 @@
+.login-root {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #fb923c 0%, #f97316 50%, #fef3c7 100%);
+  overflow: hidden;
+}
+.login-bg-glow.top {
+  position: absolute;
+  top: -80px;
+  left: -120px;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(255,111,0,0.18) 0%, rgba(168,106,44,0.12) 80%, transparent 100%);
+  filter: blur(8px);
+  opacity: 0.7;
+
+  -webkit-animation: glow 6s ease-in-out infinite alternate;
+  animation: glow 6s ease-in-out infinite alternate;
+}
+.login-bg-glow.bottom {
+  position: absolute;
+  bottom: -100px;
+  right: -140px;
+  width: 350px;
+  height: 350px;
+  background: radial-gradient(circle, rgba(168,106,44,0.18) 0%, rgba(255,111,0,0.10) 80%, transparent 100%);
+  filter: blur(12px);
+  opacity: 0.6;
+
+  -webkit-animation: glow 7s ease-in-out infinite alternate;
+  animation: glow 7s ease-in-out infinite alternate;
+  -webkit-animation-delay: 200ms;
+  animation-delay: 200ms;
+}
+
+.login-brand {
+  position: absolute;
+  top: 40px;
+  left: 40px;
+  font-weight: 800;
+  font-size: 24px;
+  letter-spacing: 6px;
+  background: linear-gradient(90deg, #ea580c, #fff);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.login-form {
+  position: relative;
+  z-index: 10;
+  background: rgba(255,255,255,0.7);
+  border: 2px solid rgba(39,39,42,0.9);
+  border-radius: 24px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  padding: 40px;
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  backdrop-filter: blur(8px);
+
+  /* animation: pop on mount */
+  -webkit-animation: pop 420ms cubic-bezier(.2,.9,.3,1) both;
+  animation: pop 420ms cubic-bezier(.2,.9,.3,1) both;
+  transform-origin: center top;
+  will-change: transform, opacity;
+}
+
+/* logo pop slightly after form */
+.login-logo {
+  font-size: 48px;
+  font-weight: 800;
+  color: #f97316;
+  text-align: center;
+  margin-bottom: 8px;
+
+  -webkit-animation: pop 520ms cubic-bezier(.2,.9,.3,1) both;
+  animation: pop 520ms cubic-bezier(.2,.9,.3,1) both;
+  -webkit-animation-delay: 80ms;
+  animation-delay: 80ms;
+}
+.login-title {
+  text-align: center;
+  color: #b45309;
+  margin-bottom: 16px;
+  font-size: 24px;
+  font-weight: 700;
+}
+.login-input {
+  margin-bottom: 12px;
+  padding: 12px 14px;
+  border: 2px solid #b45309;
+  border-radius: 8px;
+  font-size: 16px;
+  background: #f3f4f6;
+  outline: none;
+}
+.login-note {
+  color: #b45309;
+  font-size: 13px;
+  margin-bottom: 8px;
+}
+.login-btn {
+  margin-top: 8px;
+  padding: 12px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 16px;
+  border: 2px solid #92400e;
+  background: #b45309;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.login-btn.loading {
+  background: #9ca3af;
+  border-color: #d1d5db;
+  cursor: not-allowed;
+  pointer-events: none; /* prevent interaction while loading */
+}
+.spinner {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  border: 4px solid #fff;
+  border-top-color: #f59e0b;
+  border-radius: 50%;
+
+  -webkit-animation: spin 1s linear infinite;
+  animation: spin 1s linear infinite;
+
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  will-change: transform;
+}
+.login-error {
+  color: #ef4444;
+  text-align: center;
+  margin-top: 12px;
+}
+
+/* animations */
+@-webkit-keyframes spin {
+  to { -webkit-transform: rotate(360deg); transform: rotate(360deg); }
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+@keyframes pop {
+  0% { transform: scale(0.7); opacity: 0; }
+  60% { transform: scale(1.15); opacity: 1; }
+  100% { transform: scale(1); }
+}
+/* glow keyframes for background highlights */
+@-webkit-keyframes glow {
+  0% { transform: translateY(0) scale(1); opacity: 0.7; }
+  50% { transform: translateY(-8px) scale(1.03); opacity: 0.85; }
+  100% { transform: translateY(0) scale(1); opacity: 0.65; }
+}
+@keyframes glow {
+  0% { transform: translateY(0) scale(1); opacity: 0.7; }
+  50% { transform: translateY(-8px) scale(1.03); opacity: 0.85; }
+  100% { transform: translateY(0) scale(1); opacity: 0.65; }
+}

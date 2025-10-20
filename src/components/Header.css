@@ -1,0 +1,48 @@
+.header-root {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: hsl(var(--background) / 0.95);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid hsl(var(--border));
+}
+
+.header-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand { display: flex; align-items: center; gap: 12px; }
+.brand-logo { width: 32px; height: 32px; background: hsl(var(--primary)); border-radius: 8px; display:flex; align-items:center; justify-content:center;}
+.brand-text h1 { margin:0; font-weight:700; font-size:16px; color: hsl(var(--foreground)); }
+.brand-text small { color: hsl(var(--muted-foreground)); font-size:12px; }
+
+.nav { display:flex; gap:24px; align-items:center; }
+.nav-btn { background:transparent; border:none; display:inline-flex; align-items:center; gap:8px; cursor:pointer; font-size:14px; font-weight:500; }
+
+.actions { display:flex; gap:12px; align-items:center; }
+
+.btn { display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border-radius:8px; cursor:pointer; border:1px solid transparent; }
+.btn:active { transform: translateY(1px); }
+.btn-outline { background:transparent; border-color: hsl(var(--border)); }
+.btn-card { background: hsl(var(--card)); border-color: hsl(var(--border)); }
+
+.badge { display:inline-flex; align-items:center; padding:6px 10px; border-radius:8px; background: hsl(var(--secondary)); color: hsl(var(--secondary-foreground)); font-size:13px; }
+
+.mobile-toggle { background:transparent; border:none; padding:6px; cursor:pointer; }
+
+.mobile-menu { border-top: 1px solid hsl(var(--border)); background: hsl(var(--background) / 0.95); }
+.mobile-menu-inner { max-width:1200px; margin:0 auto; padding:1rem; display:flex; flex-direction:column; gap:8px; }
+.mobile-item { text-align:left; background:transparent; border:none; padding:10px 0; cursor:pointer; }
+.mobile-footer { display:flex; align-items:center; justify-content:space-between; padding-top:8px; border-top:1px solid hsl(var(--border)); }
+
+/* responsive */
+@media (max-width: 768px) {
+  .nav { display:none; }
+  .brand-text { display:none; }
+}
