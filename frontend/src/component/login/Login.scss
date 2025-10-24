@@ -205,6 +205,27 @@
   letter-spacing: 0.5px;
 }
 
+.secondary-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 1rem;
+}
+
+.link-btn {
+  background: transparent;
+  border: none;
+  color: #2563eb;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+}
+
+.link-btn:hover {
+  text-decoration: underline;
+}
+
 .fpt-uni-logo {
   position: absolute;
   top: 2.5rem;

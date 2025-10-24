@@ -59,6 +59,14 @@ function Login() {
                 </button>
 
                 {error && <div className="error">{error}</div>}
+                <div className="secondary-actions">
+                    <button type="button" className="link-btn" onClick={() => { window.location.hash = '/forgot'; }}>
+                        Forgot password?
+                    </button>
+                    <button type="button" className="link-btn" onClick={() => { window.location.hash = '/signup'; }}>
+                        Create account
+                    </button>
+                </div>
             </form>
         </div>
     );
