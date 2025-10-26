@@ -4,7 +4,7 @@ import HeroSection from "@/components/HeroSection";
 import ChatInterface from "@/components/ChatInterface";
 import KnowledgeBase from "@/components/KnowledgeBase";
 import Footer from "@/components/Footer";
-import "./Index.css";
+import "./index.css";
 
 const Index = () => {
   return (

@@ -36,30 +36,13 @@ const Header = () => {
 
           <span className="badge">Student</span>
 
-          <button className="mobile-toggle" onClick={() => setIsMenuOpen((v) => !v)} aria-label="Menu">
-            {isMenuOpen ? <X /> : <Menu />}
-          </button>
-
           <Link to="/login" className="login-link">
             <button className="btn btn-card"><User /> <span>Login</span></button>
           </Link>
         </div>
       </div>
 
-      {isMenuOpen && (
-        <div className="mobile-menu">
-          <div className="mobile-menu-inner">
-            <button className="mobile-item"><BookOpen /> Knowledge Base</button>
-            <button className="mobile-item"><MessageSquare /> Q&A Assistant</button>
-            <button className="mobile-item"><User /> Dashboard</button>
-
-            <div className="mobile-footer">
-              <button className="btn btn-outline" onClick={toggleLanguage}><Languages /> {language}</button>
-              <span className="badge">Student</span>
-            </div>
-          </div>
-        </div>
-      )}
+      
     </header>
   );
 };
