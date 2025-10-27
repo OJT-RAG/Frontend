@@ -1,0 +1,37 @@
+.chat-section { padding:4rem 0; background: hsl(var(--secondary) / 0.3); }
+.chat-wrapper { max-width:900px; margin:0 auto; padding: 0 1rem; }
+.chat-header { text-align:center; margin-bottom:24px; }
+.chat-header .badge { display:inline-flex; align-items:center; gap:8px; padding:6px 10px; background:hsl(var(--secondary)); border-radius:8px; margin-bottom:12px; }
+.chat-header h2 { font-size:1.75rem; margin-bottom:12px; }
+.chat-sub { font-size:16px; color:hsl(var(--muted-foreground)); max-width:700px; margin:0 auto; }
+
+.chat-window { background:hsl(var(--card)); border-radius:12px; padding:18px; box-shadow:var(--shadow-elevated); }
+.messages { height:384px; overflow-y:auto; display:flex; flex-direction:column; gap:12px; margin-bottom:12px; align-items: flex-start; }
+
+.message-row { display:flex; gap:12px; justify-content:flex-start; }
+.avatar { width:32px; height:32px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+.avatar.bot { background:hsl(var(--primary)); color:hsl(var(--primary-foreground)); }
+.avatar.user { background:hsl(var(--accent)); color:hsl(var(--accent-foreground)); }
+
+.message-col { display:flex; flex-direction:column; gap:6px; max-width:80%; }
+.message-bubble { padding:12px; border-radius:10px; font-size:14px; white-space:pre-wrap; }
+.message-user { background:hsl(var(--primary)); color:hsl(var(--primary-foreground)); }
+.message-assistant { background:hsl(var(--muted)); color:inherit; }
+
+.source-list { display:flex; gap:8px; flex-wrap:wrap; }
+.source { padding:4px 8px; border-radius:6px; border:1px solid hsl(var(--border)); font-size:12px; }
+
+.feedback { display:flex; gap:6px; }
+.icon-btn { background:transparent; border:none; padding:6px; cursor:pointer; }
+
+.dots { display:flex; gap:6px; align-items:center; }
+.dots span { width:8px; height:8px; background:hsl(var(--muted-foreground)); border-radius:50%; animation: bounce 1s infinite; }
+.dots span:nth-child(2) { animation-delay:0.1s; }
+.dots span:nth-child(3) { animation-delay:0.2s; }
+
+.suggested .muted { font-size:13px; color:hsl(var(--muted-foreground)); margin-bottom:8px;}
+.suggest-list { display:flex; gap:8px; flex-wrap:wrap; }
+
+.chat-input { display:flex; gap:8px; padding: 10px; justify-content: flex-start;}
+.chat-input input { flex:1; padding:10px 12px; border-radius:8px; border:1px solid hsl(var(--border)); font-size:14px; }
+.btn.small { padding:6px 10px; font-size:13px; }
