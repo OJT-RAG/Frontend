@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { Send, Bot, User, Sparkles, ThumbsUp, ThumbsDown } from "lucide-react";
 import "./ChatInterface.css";
+import { useI18n } from "../../i18n/i18n.jsx";
 
 const ChatInterface = () => {
+  const { t } = useI18n();
   const [messages, setMessages] = useState([
     {
       id: "1",
@@ -15,12 +17,17 @@ const ChatInterface = () => {
   const [inputValue, setInputValue] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  const suggestedQuestions = [
-    "What are the GPA requirements for OJT?",
-    "How do I apply for an internship?",
-    "What documents do I need for OJT registration?",
-    "When is the OJT application deadline?"
-  ];
+  const suggestedQuestions = (() => {
+    const s = t('chat_suggestions');
+    return Array.isArray(s) && s.length > 0
+      ? s
+      : [
+          "What are the GPA requirements for OJT?",
+          "How do I apply for an internship?",
+          "What documents do I need for OJT registration?",
+          "When is the OJT application deadline?",
+        ];
+  })();
 
   const handleSendMessage = () => {
     if (!inputValue.trim()) return;
@@ -57,9 +64,9 @@ const ChatInterface = () => {
     <section className="chat-section">
       <div className="chat-wrapper">
         <div className="chat-header">
-          <div className="badge"><Sparkles /> <span>Try the Assistant</span></div>
-          <h2>Ask Anything About <span className="text-gradient">OJT</span></h2>
-          <p className="chat-sub">Get instant, accurate answers powered by AI and comprehensive knowledge base</p>
+          <div className="badge"><Sparkles /> <span>{t('chat_try_assistant')}</span></div>
+          <h2>{t('chat_ask_anything').replace(' OJT','')} <span className="text-gradient">OJT</span></h2>
+          <p className="chat-sub">{t('chat_sub')}</p>
         </div>
 
         <div className="chat-window">
@@ -99,7 +106,7 @@ const ChatInterface = () => {
 
           {messages.length === 1 && (
             <div className="suggested">
-              <p className="muted">Try asking:</p>
+              <p className="muted">{t('try_asking')}</p>
               <div className="suggest-list">
                 {suggestedQuestions.map((q, i) => <button key={i} className="btn btn-outline small" onClick={() => handleSuggestedQuestion(q)}>{q}</button>)}
               </div>
@@ -107,7 +114,7 @@ const ChatInterface = () => {
           )}
 
           <div className="chat-input">
-            <input value={inputValue} onChange={(e) => setInputValue(e.target.value)} onKeyDown={onKeyDown} placeholder="Ask me anything about OJT..." />
+            <input value={inputValue} onChange={(e) => setInputValue(e.target.value)} onKeyDown={onKeyDown} placeholder={t('chat_placeholder')} />
             <button className="btn btn-primary" onClick={handleSendMessage} disabled={!inputValue.trim() || isLoading}><Send /></button>
           </div>
         </div>

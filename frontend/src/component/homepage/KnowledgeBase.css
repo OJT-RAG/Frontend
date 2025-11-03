@@ -4,7 +4,7 @@
 */
 
 /* Container & root */
-.kb-root { padding: 4rem 0; }
+.kb-root { padding: 4rem 0; background: linear-gradient(180deg, transparent, rgba(0,0,0,0.02)); }
 .kb-container { max-width: 1200px; margin: 0 auto; padding: 0 1rem; }
 
 /* Header */
@@ -13,7 +13,7 @@
 .kb-badge-icon { width: 14px; height: 14px; display:inline-block; }
 .kb-title { font-size: 2rem; font-weight: 700; margin: 0 0 0.5rem; }
 @media (min-width: 1024px) { .kb-title { font-size: 2.5rem; } }
-.kb-title-gradient { /* optional gradient styling placeholder */ }
+.kb-title-gradient { background: linear-gradient(90deg, hsl(var(--primary)) 0%, hsl(var(--accent)) 60%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
 .kb-sub { font-size: 1.05rem; color: #6b7280; max-width: 720px; margin: 0 auto; }
 
 /* Search */
@@ -27,8 +27,8 @@
 @media (min-width: 768px) { .kb-grid { grid-template-columns: repeat(2,1fr); } }
 @media (min-width: 1024px) { .kb-grid { grid-template-columns: repeat(4,1fr); } }
 
-.kb-card { padding: 1.25rem; border-radius: 8px; transition: box-shadow .18s ease, transform .18s ease; cursor: pointer; background: var(--card-bg, #fff); }
-.kb-card:hover { box-shadow: 0 10px 30px rgba(0,0,0,0.08); transform: translateY(-4px); }
+.kb-card { padding: 1.25rem; border-radius: 14px; transition: box-shadow .18s ease, transform .18s ease; cursor: pointer; background: var(--card-bg, #fff); border:1px solid hsl(var(--border)); box-shadow: 0 2px 10px rgba(0,0,0,0.04); }
+.kb-card:hover { box-shadow: 0 16px 36px rgba(0,0,0,0.12); transform: translateY(-4px); }
 
 .kb-cat { width:48px; height:48px; border-radius:8px; display:flex; align-items:center; justify-content:center; margin-bottom:0.75rem; }
 .kb-cat-primary { background: rgba(255,183,77,0.08); color: hsl(var(--primary)); }
@@ -51,7 +51,7 @@
 .kb-panels { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
 @media (min-width: 1024px) { .kb-panels { grid-template-columns: repeat(2,1fr); } }
 
-.kb-panel { padding: 1.25rem; border-radius: 8px; background: var(--panel-bg, #fff); }
+.kb-panel { padding: 1.25rem; border-radius: 14px; background: var(--panel-bg, #fff); border:1px solid hsl(var(--border)); box-shadow: 0 2px 10px rgba(0,0,0,0.04); }
 .kb-panel-header { display:flex; align-items:center; justify-content:space-between; margin-bottom: 1rem; }
 .kb-panel-title { font-size: 1.125rem; margin: 0; }
 .kb-viewall { display:inline-flex; align-items:center; gap:0.5rem; }
@@ -60,7 +60,7 @@
 .kb-panel-body { display:flex; flex-direction:column; gap: 0.75rem; }
 
 .kb-update { padding: 0.5rem; border-radius:8px; display:flex; transition: background .12s ease; }
-.kb-update:hover { background: rgba(0,0,0,0.03); }
+.kb-update:hover { background: rgba(0,0,0,0.035); }
 .kb-update-left { display:flex; gap:0.75rem; align-items:flex-start; }
 .kb-update-icon { width: 32px; height:32px; border-radius:8px; display:flex; align-items:center; justify-content:center; background: rgba(255,183,77,0.08); }
 .kb-update-title { font-weight: 500; margin: 0 0 0.25rem; font-size: 0.95rem; }
@@ -70,7 +70,7 @@
 
 /* Documents */
 .kb-doc { display:flex; align-items:center; justify-content:space-between; padding: 0.5rem; border-radius:8px; transition: background .12s ease; }
-.kb-doc:hover { background: rgba(0,0,0,0.03); }
+.kb-doc:hover { background: rgba(0,0,0,0.035); }
 .kb-doc-left { display:flex; gap:0.75rem; align-items:center; }
 .kb-doc-icon { width: 32px; height:32px; border-radius:8px; display:flex; align-items:center; justify-content:center; background: rgba(59,130,246,0.08); }
 .kb-doc-title { font-weight: 500; margin: 0 0 0.25rem; font-size: 0.95rem; }
@@ -80,3 +80,10 @@
 
 /* small utilities */
 .kb-dot { color: #9ca3af; margin: 0 0.25rem; }
+
+/* Title gradient helper */
+.kb-title-gradient { background: linear-gradient(90deg, hsl(var(--primary)) 0%, hsl(var(--accent)) 60%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+
+@media (prefers-reduced-motion: reduce) {
+   .kb-card, .kb-panel { transition: none; }
+}

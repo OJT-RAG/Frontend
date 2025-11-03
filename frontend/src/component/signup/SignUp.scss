@@ -5,6 +5,8 @@
   align-items: center;
   min-height: 100vh;
   background: linear-gradient(120deg, #f8b971 0%, #df8c39 40%, #f3e9e2 100%);
+  background-size: 200% 200%;
+  animation: signupGradient 20s ease-in-out infinite alternate;
   overflow: hidden;
 }
 
@@ -19,6 +21,7 @@
   z-index: 1;
   filter: blur(8px);
   opacity: 0.7;
+  animation: glowPulseWarm 16s ease-in-out infinite;
 }
 
 .signup-container::after {
@@ -32,6 +35,7 @@
   z-index: 1;
   filter: blur(10px);
   opacity: 0.6;
+  animation: glowPulseWarmAlt 20s ease-in-out infinite 1.2s;
 }
 
 .signup-form {
@@ -128,6 +132,18 @@
   background: #fffbe6;
 }
 
+/* keyboard focus visibility */
+.signup-form input:focus-visible,
+.signup-form button:focus-visible {
+  outline: 3px solid rgba(204,135,75,0.6);
+  outline-offset: 2px;
+}
+.return-top:focus-visible,
+.return-btn:focus-visible {
+  outline: 3px solid rgba(16,185,129,0.6);
+  outline-offset: 3px;
+}
+
 .signup-form .row {
   display: flex;
   gap: 8px;
@@ -168,4 +184,28 @@
   0% { transform: scale(0.7); opacity: 0; }
   60% { transform: scale(1.15); opacity: 1; }
   100% { transform: scale(1); }
+}
+
+@keyframes signupGradient {
+  0% { background-position: 0% 0%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 100%; }
+}
+
+@keyframes glowPulseWarm {
+  0% { opacity: 0.7; transform: scale(1); }
+  40% { opacity: 0.28; transform: scale(1.05); }
+  100% { opacity: 0.7; transform: scale(1); }
+}
+
+@keyframes glowPulseWarmAlt {
+  0% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 0.22; transform: scale(1.06); }
+  100% { opacity: 0.6; transform: scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .signup-container { animation: none; }
+  .signup-container::before,
+  .signup-container::after { animation: none; }
 }
