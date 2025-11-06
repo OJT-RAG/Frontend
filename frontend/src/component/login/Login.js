@@ -28,8 +28,11 @@ function Login() {
         setError('');
         const result = await loginApi(email, password);
         if (result.success) {
-            // Show success toast
-            alert('Login successful!');
+            
+             localStorage.setItem('userRole', 'students');
+
+        // 👉 Chuyển hướng về homepage
+        navigate('/');
         } else {
             setError(result.message);
         }
