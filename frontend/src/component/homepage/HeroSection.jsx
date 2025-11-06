@@ -5,7 +5,7 @@ import "./HeroSection.css";
 import { useI18n } from "../../i18n/i18n.jsx";
 
 const HeroSection = () => {
-  const iconSize = 20;
+  // const iconSize = 20;
   const { t } = useI18n();
 
   return (

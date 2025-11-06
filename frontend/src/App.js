@@ -5,6 +5,7 @@ import ForgotPassword from './component/forgotpassword/ForgotPassword';
 import CV from './component/profile/CV';
 import './component/login/Login.scss';
 import HomePage from './component/homepage/HomePage';
+import Dashboard from './component/pages/dashboard/Dashboard';
 function App() {
   return (
     <Router>
@@ -15,6 +16,7 @@ function App() {
         <Route path="/forgot" element={<ForgotPassword />} />
         <Route path="/homepage" element={<HomePage />} />
         <Route path="/profile/cv" element={<CV />} />
+        <Route path="/dashboard" element={<Dashboard />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </Router>
