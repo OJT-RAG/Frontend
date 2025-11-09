@@ -3,19 +3,23 @@ import Login from './component/login/Login';
 import SignUp from './component/signup/SignUp';
 import ForgotPassword from './component/forgotpassword/ForgotPassword';
 import CV from './component/profile/CV';
+import JobList from './component/profile/Joblist';
 import './component/login/Login.scss';
 import HomePage from './component/homepage/HomePage';
 import Dashboard from './component/pages/dashboard/Dashboard';
+import Header from './component/homepage/Header';
 function App() {
   return (
     <Router>
+      <Header />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/forgot" element={<ForgotPassword />} />
         <Route path="/homepage" element={<HomePage />} />
-        <Route path="/profile/cv" element={<CV />} />
+  <Route path="/profile/cv" element={<CV />} />
+  <Route path="/jobs" element={<JobList />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Languages, User, MessageSquare, BookOpen } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Languages, User, MessageSquare, BookOpen, Briefcase, Home } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
 import { useI18n } from "../../i18n/i18n.jsx";
 import "./Header.css";
 
@@ -21,10 +21,17 @@ const Header = () => {
     return () => window.removeEventListener("storage", handleStorage);
   }, []);
 
+  const location = useLocation();
+  const isActive = (path) => location.pathname === path;
+
   return (
     <header className="header-root">
       <div className="header-container">
         <div className="brand">
+          <Link to="/" className={`home-chip ${isActive('/') ? 'active' : ''}`} aria-label={t('home')}>
+            <Home size={14} />
+            <span className="label">{t('home')}</span>
+          </Link>
           <div className="brand-logo">
             <MessageSquare
               style={{
@@ -41,14 +48,21 @@ const Header = () => {
         </div>
 
         <nav className="nav" aria-label="Main navigation">
-          <button className="nav-btn">
+          <Link to='/knowledge' className={`nav-btn ${isActive('/knowledge') ? 'active' : ''}`}>
             <BookOpen /> <span>{t("nav_knowledge")}</span>
-          </button>
-          <button className="nav-btn">
+            <span className="line" aria-hidden="true"></span>
+          </Link>
+          <Link to='/qa' className={`nav-btn ${isActive('/qa') ? 'active' : ''}`}>
             <MessageSquare /> <span>{t("nav_qa")}</span>
-          </button>
-          <Link to='/dashboard' className="nav-btn">
+            <span className="line" aria-hidden="true"></span>
+          </Link>
+          <Link to='/dashboard' className={`nav-btn ${isActive('/dashboard') ? 'active' : ''}`}>
             <User /> <span>{t("nav_dashboard")}</span>
+            <span className="line" aria-hidden="true"></span>
+          </Link>
+          <Link to='/jobs' className={`nav-btn ${isActive('/jobs') ? 'active' : ''}`}>
+            <Briefcase /> <span>Jobs</span>
+            <span className="line" aria-hidden="true"></span>
           </Link>
         </nav>
 
@@ -123,6 +137,12 @@ const Header = () => {
               </button>
             </Link>
           )}
+          {/* Profile avatar (placeholder) - navigates to CV/profile */}
+          <Link to="/profile/cv" className="avatar-link" aria-label={t('cv_title')}>
+            <div className="avatar" role="img" aria-hidden="true">
+              <User />
+            </div>
+          </Link>
         </div>
       </div>
     </header>

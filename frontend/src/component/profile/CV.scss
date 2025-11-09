@@ -124,7 +124,7 @@ $ink: #222;
   100% { transform: translate3d(0, 0, 0) scale(1); }
 }
 
-.fpt-uni-logo {
+.cv-page .fpt-uni-logo {
   position: absolute;
   top: 2.5rem;
   left: 2.5rem;
@@ -138,8 +138,9 @@ $ink: #222;
   -webkit-text-fill-color: transparent;
   text-shadow: 0 2px 8px rgba(255,111,0,0.18), 0 1px 2px $ink;
   animation: logoSlide 1.2s cubic-bezier(.68,-0.55,.27,1.55);
-  z-index: 10;
+  z-index: 12; /* above cv-card (z-index:2), below header (50) */
   cursor: pointer;
+  pointer-events: auto;
 }
 
 @keyframes logoSlide {
@@ -159,6 +160,45 @@ $ink: #222;
   backdrop-filter: blur(8px);
   padding: 2rem 2rem 2.25rem;
 }
+
+/* Layout when sidebar is present */
+.cv-container {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.cv-sidebar {
+  width: 220px;
+  flex: 0 0 220px;
+  background: rgba(255,255,255,0.85);
+  border: 2px solid rgba(34,34,34,0.06);
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 6px 18px rgba(60,60,60,0.08);
+}
+
+.cv-sidebar nav ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.5rem; }
+.cv-side-link {
+  display: block;
+  padding: 0.7rem 0.9rem;
+  border-radius: 8px;
+  color: $ink;
+  font-weight: 700;
+  text-decoration: none;
+  background: transparent;
+  border: 1px solid transparent;
+  transition: background .15s ease, transform .06s ease;
+}
+.cv-side-link:hover { background: #fff6e6; transform: translateY(-1px); }
+.cv-side-link:focus-visible { outline: 3px solid rgba(204,135,75,0.45); outline-offset: 3px; border-radius: 8px; }
+
+/* Ensure card stretches correctly when sidebar present */
+.cv-card { flex: 1 1 auto; }
 
 /* top-right brand image */
 .brand-top-right {

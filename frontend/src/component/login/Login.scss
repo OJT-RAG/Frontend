@@ -256,8 +256,13 @@
   -webkit-text-fill-color: transparent;
   text-shadow: 0 2px 8px rgba(255,111,0,0.18), 0 1px 2px #222;
   animation: logoSlide 1.2s cubic-bezier(.68,-0.55,.27,1.55);
-  z-index: 10;
+  z-index: 100; /* above sticky header (z-index:50) to ensure clickability */
+  cursor: pointer;
+  transition: transform .15s ease, filter .2s ease;
 }
+
+.fpt-uni-logo:hover { transform: translateY(-2px); filter: brightness(1.1); }
+.fpt-uni-logo:active { transform: translateY(1px); filter: brightness(.95); }
 
 @keyframes logoSlide {
   0% { transform: translateX(-80px); opacity: 0; }

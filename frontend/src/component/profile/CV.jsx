@@ -7,6 +7,7 @@ import { useI18n } from '../../i18n/i18n.jsx';
 function CV({ student }) {
   const navigate = useNavigate();
   const { t } = useI18n();
+  // Remove internal panel state; CV now only shows profile info.
 
   const data = student || {
     name: 'Nguyen Van A',
@@ -27,10 +28,7 @@ function CV({ student }) {
     return (first + last).toUpperCase();
   };
 
-  const handleLogoHome = (e) => {
-    e.preventDefault();
-    navigate('/');
-  };
+  // Decorative text logo only; no navigation to avoid accidental redirects
 
   return (
     <div className="cv-page">
@@ -55,14 +53,16 @@ function CV({ student }) {
         className="fpt-uni-logo"
         role="button"
         tabIndex={0}
-        onClick={handleLogoHome}
-        onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && handleLogoHome(e)}
+        aria-label={t('home')}
+        onClick={() => navigate('/')}
+        onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && navigate('/')}
       >
         FPT UNIVERSITY
       </div>
 
-      <div className="cv-card">
-        <div className="cv-header">
+      <div className="cv-container">
+        <div className="cv-card">
+          <div className="cv-header">
           <h1>{t('cv_title')}</h1>
           <div className="cv-actions">
             <button type="button" className="btn secondary" onClick={() => navigate('/')}>{t('home')}</button>
@@ -116,6 +116,7 @@ function CV({ student }) {
             <div className="cv-footer">
               <button type="button" className="btn ghost" onClick={() => window.print()}>{t('download_print')}</button>
             </div>
+          </div>
           </div>
         </div>
       </div>
