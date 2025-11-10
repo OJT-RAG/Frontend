@@ -38,7 +38,8 @@ function Login() {
         }
     };
 
-    const handleLogoHome = (e) => {
+    const 
+    handleLogoHome = (e) => {
         e.preventDefault();
         navigate('/');
     };

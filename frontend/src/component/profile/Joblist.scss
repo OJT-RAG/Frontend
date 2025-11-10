@@ -15,5 +15,8 @@
 .diff-easy{background:#e6f7ee;color:#0f7a4b}
 .diff-medium{background:#fff7e6;color:#a86a2c}
 .diff-hard{background:#fde8e8;color:#b42318}
+.jl-detail{display:inline-block;padding:.4rem .75rem;border:2px solid #a86a2c;border-radius:8px;font-size:.75rem;font-weight:700;color:#a86a2c;background:#fff;text-decoration:none;transition:background .15s ease,transform .08s ease}
+.jl-detail:hover{background:#fff6e6;transform:translateY(-1px)}
+.jl-detail:active{transform:translateY(0);background:#ffe3bf}
 .jl-empty{text-align:center;color:#666}
 @media(max-width:720px){.joblist-controls{width:100%}.jl-input{flex:1;min-width:0}.joblist-header{flex-direction:column;align-items:flex-start}}

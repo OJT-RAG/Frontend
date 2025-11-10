@@ -4,6 +4,7 @@ import SignUp from './component/signup/SignUp';
 import ForgotPassword from './component/forgotpassword/ForgotPassword';
 import CV from './component/profile/CV';
 import JobList from './component/profile/Joblist';
+import JobDetail from './component/profile/Jobdetail';
 import './component/login/Login.scss';
 import HomePage from './component/homepage/HomePage';
 import Dashboard from './component/pages/dashboard/Dashboard';
@@ -20,6 +21,7 @@ function App() {
         <Route path="/homepage" element={<HomePage />} />
   <Route path="/profile/cv" element={<CV />} />
   <Route path="/jobs" element={<JobList />} />
+  <Route path="/jobs/:id" element={<JobDetail />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>

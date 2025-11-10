@@ -1,5 +1,7 @@
 import React, { useMemo, useState, useEffect } from 'react';
 import './Joblist.scss';
+import { Link } from 'react-router-dom';
+import { JOBS } from './jobsData';
 
 // Difficulty color mapping (basic badges)
 const difficultyStyles = {
@@ -9,14 +11,7 @@ const difficultyStyles = {
 };
 
 // Mock dataset (will be replaced by backend later)
-const MOCK_JOBS = [
-  { id: 1, company: 'Alpha Tech', industry: 'SE', title: 'Frontend Intern', difficulty: 'Medium', salary: '$250', location: 'Hanoi', createdAt: '2025-11-01' },
-  { id: 2, company: 'Beta Vision', industry: 'FE', title: 'UI Prototype Intern', difficulty: 'Easy', salary: '$220', location: 'Da Nang', createdAt: '2025-11-06' },
-  { id: 3, company: 'Creative Grid', industry: 'GD', title: 'Graphic Design Intern', difficulty: 'Medium', salary: '$230', location: 'HCMC', createdAt: '2025-11-05' },
-  { id: 4, company: 'Insight Bank', industry: 'IB', title: 'Investment Research Intern', difficulty: 'Hard', salary: '$300', location: 'Hanoi', createdAt: '2025-10-28' },
-  { id: 5, company: 'Scale Systems', industry: 'SE', title: 'Backend Intern', difficulty: 'Hard', salary: '$320', location: 'Remote', createdAt: '2025-11-04' },
-  { id: 6, company: 'Pixel Forge', industry: 'GD', title: 'Visual Design Intern', difficulty: 'Easy', salary: '$200', location: 'HCMC', createdAt: '2025-11-02' }
-];
+const MOCK_JOBS = JOBS;
 
 export default function JobList({ defaultIndustry = 'SE' }) {
   const [query, setQuery] = useState('');
@@ -112,6 +107,7 @@ export default function JobList({ defaultIndustry = 'SE' }) {
               <th>Salary</th>
               <th>Location</th>
               <th>Posted</th>
+              <th>Detail</th>
             </tr>
           </thead>
           <tbody>
@@ -129,6 +125,9 @@ export default function JobList({ defaultIndustry = 'SE' }) {
                 <td>{job.salary}</td>
                 <td>{job.location}</td>
                 <td>{job.createdAt}</td>
+                <td>
+                  <Link className="jl-detail" to={`/jobs/${job.id}`}>Detail</Link>
+                </td>
               </tr>
             ))}
           </tbody>
