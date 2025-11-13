@@ -1,15 +1,35 @@
-import React from "react";
+import React, { useState } from "react";
 import Sidebar from "./Sidebar";
 import ChatPanel from "./ChatPanel";
+import PdfManager from "../pdf/pdfManager";
 import "./Dashboard.css";
 
 const Dashboard = () => {
+  // 👈 Thêm state để theo dõi module đang hoạt động
+  const [activeModule, setActiveModule] = useState("chat"); 
+
+  // Hàm render nội dung tương ứng
+  const renderContent = () => {
+    switch (activeModule) {
+      case "chat":
+        return <ChatPanel />;
+      case "pdf":
+        return <PdfManager />; // 👈 Hiển thị PdfManager
+      case "settings":
+        return <div>Nội dung Cài đặt sẽ ở đây...</div>; // Tạm thời
+      default:
+        return <ChatPanel />;
+    }
+  };
+
   return (
     <div className="dashboard-root">
       <div className="dashboard-container">
-        <Sidebar />
+        {/* 👈 Truyền state và hàm set state vào Sidebar */}
+        <Sidebar activeModule={activeModule} setActiveModule={setActiveModule} />
         <div className="dashboard-content">
-          <ChatPanel />
+          {/* 👈 Gọi hàm để render nội dung động */}
+          {renderContent()}
         </div>
       </div>
     </div>
