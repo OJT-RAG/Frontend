@@ -19,6 +19,22 @@ export default function JobList({ defaultIndustry = 'SE' }) {
   const [sortMode, setSortMode] = useState('newest'); // newest | best
   const [jobs, setJobs] = useState(MOCK_JOBS);
   const [isRefreshing, setIsRefreshing] = useState(false);
+  const [showBookmarks, setShowBookmarks] = useState(false);
+
+  // LocalStorage keys
+  const BOOKMARK_KEY = 'bookmarkedJobs';
+  const APPLY_STATUS_KEY = 'applyStatusMap'; // { [jobId]: 'applied' | 'waiting' | 'none' }
+
+  const [bookmarkedIds, setBookmarkedIds] = useState(() => {
+    try { return JSON.parse(localStorage.getItem(BOOKMARK_KEY) || '[]'); } catch { return []; }
+  });
+  const [applyStatus, setApplyStatus] = useState(() => {
+    try { return JSON.parse(localStorage.getItem(APPLY_STATUS_KEY) || '{}'); } catch { return {}; }
+  });
+
+  // Persist bookmark/status changes
+  useEffect(() => { localStorage.setItem(BOOKMARK_KEY, JSON.stringify(bookmarkedIds)); }, [bookmarkedIds]);
+  useEffect(() => { localStorage.setItem(APPLY_STATUS_KEY, JSON.stringify(applyStatus)); }, [applyStatus]);
 
   // When defaultIndustry changes (from CV major), sync initial state
   useEffect(() => {
@@ -58,11 +74,48 @@ export default function JobList({ defaultIndustry = 'SE' }) {
     }, 800);
   };
 
+  // Toggle bookmark for a job
+  const toggleBookmark = (id) => {
+    setBookmarkedIds(prev => prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id]);
+  };
+
+  // Derived: bookmarked jobs
+  const bookmarkedJobs = useMemo(() => jobs.filter(j => bookmarkedIds.includes(j.id)), [jobs, bookmarkedIds]);
+
+  // Helper: read status with fallbacks from old 'appliedJobs'
+  useEffect(() => {
+    // migrate: if appliedJobs exists, mark those as 'applied' when empty
+    const appliedRaw = localStorage.getItem('appliedJobs');
+    if (appliedRaw) {
+      try {
+        const arr = JSON.parse(appliedRaw);
+        if (Array.isArray(arr) && arr.length) {
+          setApplyStatus(prev => {
+            const next = { ...prev };
+            arr.forEach(id => { if (!next[id]) next[id] = 'applied'; });
+            return next;
+          });
+        }
+      } catch {}
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <div className="joblist-root">
       <div className="joblist-header">
         <h2 className="joblist-title">Internship Opportunities</h2>
         <div className="joblist-controls">
+          <button
+            className="jl-bookmark-btn"
+            onClick={() => setShowBookmarks(s => !s)}
+            title="View bookmarked jobs"
+          >
+            Bookmark
+            {bookmarkedIds.length > 0 && (
+              <span className="jl-bookmark-count">{bookmarkedIds.length}</span>
+            )}
+          </button>
           <input
             className="jl-input"
             placeholder="Search company, title, location..."
@@ -96,6 +149,61 @@ export default function JobList({ defaultIndustry = 'SE' }) {
         </div>
       </div>
 
+      {/* Bookmark Panel */}
+      {showBookmarks && (
+        <div className="bookmark-panel">
+          <div className="bp-header">
+            <h3>Bookmarks</h3>
+            <button className="bp-close" onClick={() => setShowBookmarks(false)}>Close</button>
+          </div>
+          {bookmarkedJobs.length === 0 ? (
+            <div className="bp-empty">No saved jobs yet.</div>
+          ) : (
+            <table className="bp-table">
+              <thead>
+                <tr>
+                  <th>Company</th>
+                  <th>Role</th>
+                  <th>Location</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {bookmarkedJobs.map(job => {
+                  const status = applyStatus[job.id] || 'none';
+                  return (
+                    <tr key={`bm-${job.id}`}>
+                      <td>{job.company}</td>
+                      <td>{job.title}</td>
+                      <td>{job.location}</td>
+                      <td>
+                        <span className={`status-badge ${status}`}>
+                          {status === 'applied' ? 'Applied' : status === 'waiting' ? 'Waiting for response' : 'Chưa applied'}
+                        </span>
+                      </td>
+                      <td className="bp-actions">
+                        <button className="bp-unsave" onClick={() => toggleBookmark(job.id)}>Bỏ lưu</button>
+                        <Link className="bp-detail" to={`/jobs/${job.id}`}>Detail</Link>
+                        <select
+                          className="bp-status-select"
+                          value={applyStatus[job.id] || 'none'}
+                          onChange={(e) => setApplyStatus(prev => ({ ...prev, [job.id]: e.target.value }))}
+                        >
+                          <option value="none">Chưa applied</option>
+                          <option value="waiting">Waiting for response</option>
+                          <option value="applied">Applied</option>
+                        </select>
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          )}
+        </div>
+      )}
+
       <div className="joblist-table-wrapper">
         <table className="joblist-table">
           <thead>
@@ -126,7 +234,15 @@ export default function JobList({ defaultIndustry = 'SE' }) {
                 <td>{job.location}</td>
                 <td>{job.createdAt}</td>
                 <td>
-                  <Link className="jl-detail" to={`/jobs/${job.id}`}>Detail</Link>
+                  <div className="jl-actions">
+                    <Link className="jl-detail" to={`/jobs/${job.id}`}>Detail</Link>
+                    <button
+                      className={`jl-save ${bookmarkedIds.includes(job.id) ? 'saved' : ''}`}
+                      onClick={() => toggleBookmark(job.id)}
+                    >
+                      {bookmarkedIds.includes(job.id) ? 'Saved' : 'Save'}
+                    </button>
+                  </div>
                 </td>
               </tr>
             ))}

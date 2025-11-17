@@ -28,6 +28,21 @@ export default function JobDetail() {
     const current = JSON.parse(localStorage.getItem(key) || '[]');
     if (!current.includes(job.id)) current.push(job.id);
     localStorage.setItem(key, JSON.stringify(current));
+
+    // Also record status for Bookmarks panel
+    const STATUS_KEY = 'applyStatusMap';
+    const map = JSON.parse(localStorage.getItem(STATUS_KEY) || '{}');
+    map[job.id] = 'waiting'; // default to waiting after apply
+    localStorage.setItem(STATUS_KEY, JSON.stringify(map));
+
+    // Record application meta (date + status) for CV Applications panel
+    const META_KEY = 'applicationMeta';
+    const meta = JSON.parse(localStorage.getItem(META_KEY) || '{}');
+    meta[job.id] = {
+      date: new Date().toISOString(),
+      status: 'waiting'
+    };
+    localStorage.setItem(META_KEY, JSON.stringify(meta));
     alert('Applied successfully! Your application has been sent to admin and recruiters.');
   };
 
