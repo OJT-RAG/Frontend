@@ -32,19 +32,7 @@ const Header = () => {
             <Home size={14} />
             <span className="label">{t('home')}</span>
           </Link>
-          <div className="brand-logo">
-            <MessageSquare
-              style={{
-                width: iconSize,
-                height: iconSize,
-                color: "hsl(var(--primary-foreground))",
-              }}
-            />
-          </div>
-          <div className="brand-text">
-            <h1>{t("appName")}</h1>
-            <small>{t("appTagline")}</small>
-          </div>
+          {/* Removed brand text/logo per request */}
         </div>
 
         <nav className="nav" aria-label="Main navigation">
@@ -54,6 +42,10 @@ const Header = () => {
           </Link>
           <Link to='/qa' className={`nav-btn ${isActive('/qa') ? 'active' : ''}`}>
             <MessageSquare /> <span>{t("nav_qa")}</span>
+            <span className="line" aria-hidden="true"></span>
+          </Link>
+          <Link to='/ojt' className={`nav-btn ${isActive('/ojt') ? 'active' : ''}`}>
+            <BookOpen /> <span>OJT Docs</span>
             <span className="line" aria-hidden="true"></span>
           </Link>
           <Link to='/dashboard' className={`nav-btn ${isActive('/dashboard') ? 'active' : ''}`}>
