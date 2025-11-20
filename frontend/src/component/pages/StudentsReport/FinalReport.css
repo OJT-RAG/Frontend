@@ -1,0 +1,64 @@
+/* Container chính của Form */
+.final-report-container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Tiêu đề Form */
+.final-report-header {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #1890ff; /* Màu chính của Ant Design */
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 15px;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+/* Layout lưới cho các trường định danh (3 cột) */
+.form-grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+/* Layout lưới cho phần đánh giá (2 cột) */
+.form-grid-2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+/* Đảm bảo InputNumber và các Input khác chiếm toàn bộ chiều rộng của Form.Item */
+.full-width {
+    width: 100% !important;
+}
+
+/* Nút Submit */
+.submit-group {
+    margin-top: 30px;
+    text-align: right;
+}
+
+.submit-button {
+    width: 100%;
+    height: 40px;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .final-report-container {
+        margin: 20px 10px;
+        padding: 20px;
+    }
+    
+    .form-grid-3, .form-grid-2 {
+        grid-template-columns: 1fr; /* Chuyển sang layout 1 cột trên thiết bị nhỏ */
+    }
+}

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Sidebar from "./Sidebar";
 import ChatPanel from "./ChatPanel";
 import PdfManager from "../pdf/pdfManager";
+import FinalReportPage from "../StudentsReport/FinalReportPage";
 import "./Dashboard.css";
 
 const Dashboard = () => {
@@ -15,6 +16,8 @@ const Dashboard = () => {
         return <ChatPanel />;
       case "pdf":
         return <PdfManager />; // 👈 Hiển thị PdfManager
+      case "finalreport":
+        return <FinalReportPage />; // 👈 Hiển thị PdfManager  
       case "settings":
         return <div>Nội dung Cài đặt sẽ ở đây...</div>; // Tạm thời
       default:
