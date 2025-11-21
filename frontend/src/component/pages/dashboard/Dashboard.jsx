@@ -4,6 +4,7 @@ import ChatPanel from "./ChatPanel";
 import PdfManager from "../pdf/pdfManager";
 import FinalReportPage from "../StudentsReport/FinalReportPage";
 import "./Dashboard.css";
+import UpdateUserPage from "../userProfile/UpdateUserPage.jsx";
 
 const Dashboard = () => {
   // 👈 Thêm state để theo dõi module đang hoạt động
@@ -18,6 +19,8 @@ const Dashboard = () => {
         return <PdfManager />; // 👈 Hiển thị PdfManager
       case "finalreport":
         return <FinalReportPage />; // 👈 Hiển thị PdfManager  
+      case "updateuser":
+        return <UpdateUserPage/>; 
       case "settings":
         return <div>Nội dung Cài đặt sẽ ở đây...</div>; // Tạm thời
       default:

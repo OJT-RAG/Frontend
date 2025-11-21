@@ -29,6 +29,13 @@ const Sidebar = ({ activeModule, setActiveModule }) => {
       >
         <FileText /> Gửi báo cáo cuối kỳ
       </button>
+      <button
+        className={`sidebar-btn ${activeModule === "user" ? "active" : ""}`}
+        onClick={() => setActiveModule("updateuser")}
+      >
+        <FileText /> Chỉnh sửa thông tin
+      </button>
+
       {/* Nút Cài đặt (giữ nguyên) */}
       <button
         className={`sidebar-btn ${activeModule === "settings" ? "active" : ""}`}
