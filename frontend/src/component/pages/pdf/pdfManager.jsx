@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { Document, Page, pdfjs } from 'react-pdf';
-// Import CSS cho lớp chú thích và văn bản
-import 'react-pdf/dist/Page/AnnotationLayer.css'; 
-import 'react-pdf/dist/Page/TextLayer.css';  
+import { Document, Page } from 'react-pdf';
+import * as pdfjsLib from 'pdfjs-dist';
+// Text/annotation layers disabled below so CSS not needed
 import './pdfManager.css';
 
 // ----------------------------------------------------
@@ -13,11 +12,8 @@ const SAMPLE_PDF_URL = samplePdf;
 // ----------------------------------------------------
 
 
-// 2. Cấu hình Worker (Sử dụng CDN ổn định)
-pdfjs.GlobalWorkerOptions.workerSrc = new URL(
-  "pdfjs-dist/build/pdf.worker.min.mjs",
-  import.meta.url
-).toString();
+// Configure worker explicitly to ensure CRA resolves it
+pdfjsLib.GlobalWorkerOptions.workerSrc = new URL('pdfjs-dist/build/pdf.worker.min.mjs', import.meta.url).toString();
 const PdfManager = () => {
   const [numPages, setNumPages] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
@@ -100,9 +96,9 @@ const PdfManager = () => {
           {/* Component Page hiển thị trang hiện tại */}
           <Page 
             pageNumber={pageNumber} 
-            renderTextLayer={true} 
-            renderAnnotationLayer={true} 
-            scale={1.5} // Tăng scale lên 1.5 để dễ xem hơn
+            renderTextLayer={false} 
+            renderAnnotationLayer={false} 
+            scale={1.5}
           />
         </Document>
       </div>
