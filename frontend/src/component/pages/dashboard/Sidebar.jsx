@@ -23,6 +23,18 @@ const Sidebar = ({ activeModule, setActiveModule }) => {
       >
         <FileText /> Quản lý PDF
       </button>
+      <button
+        className={`sidebar-btn ${activeModule === "pdf" ? "active" : ""}`}
+        onClick={() => setActiveModule("finalreport")}
+      >
+        <FileText /> Gửi báo cáo cuối kỳ
+      </button>
+      <button
+        className={`sidebar-btn ${activeModule === "user" ? "active" : ""}`}
+        onClick={() => setActiveModule("updateuser")}
+      >
+        <FileText /> Chỉnh sửa thông tin
+      </button>
 
       {/* Nút Cài đặt (giữ nguyên) */}
       <button
