@@ -45,7 +45,7 @@ const Header = () => {
             <span className="line" aria-hidden="true"></span>
           </Link>
           <Link to='/ojt' className={`nav-btn ${isActive('/ojt') ? 'active' : ''}`}>
-            <BookOpen /> <span>OJT Docs</span>
+            <BookOpen /> <span>{t('nav_ojt_docs') || 'OJT Docs'}</span>
             <span className="line" aria-hidden="true"></span>
           </Link>
           <Link to='/dashboard' className={`nav-btn ${isActive('/dashboard') ? 'active' : ''}`}>
@@ -53,11 +53,11 @@ const Header = () => {
             <span className="line" aria-hidden="true"></span>
           </Link>
           <Link to='/jobs' className={`nav-btn ${isActive('/jobs') ? 'active' : ''}`}>
-            <Briefcase /> <span>Jobs</span>
+            <Briefcase /> <span>{t('nav_jobs') || 'Jobs'}</span>
             <span className="line" aria-hidden="true"></span>
           </Link>
           <Link to='/admin' className={`nav-btn ${isActive('/admin') ? 'active' : ''}`}>
-            <Shield /> <span>Admin</span>
+            <Shield /> <span>{t('nav_admin') || 'Admin'}</span>
             <span className="line" aria-hidden="true"></span>
           </Link>
         </nav>
@@ -112,7 +112,7 @@ const Header = () => {
 
           {/* Badge */}
           <span className="badge">
-            {role === "students" ? "Student" : "Guest"}
+            {role === "students" ? (t('role_student') || 'Student') : (t('role_guest') || 'Guest')}
           </span>
 
           {/* Nút login/logout */}

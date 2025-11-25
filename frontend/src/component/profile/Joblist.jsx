@@ -2,6 +2,7 @@ import React, { useMemo, useState, useEffect } from 'react';
 import './Joblist.scss';
 import { Link } from 'react-router-dom';
 import { JOBS } from './jobsData';
+import { useI18n } from '../../i18n/i18n.jsx';
 
 // Difficulty color mapping (basic badges)
 const difficultyStyles = {
@@ -14,6 +15,7 @@ const difficultyStyles = {
 const MOCK_JOBS = JOBS;
 
 export default function JobList({ defaultIndustry = 'SE' }) {
+  const { t } = useI18n();
   const [query, setQuery] = useState('');
   const [industry, setIndustry] = useState(defaultIndustry); // FE | IB | GD | SE
   const [sortMode, setSortMode] = useState('newest'); // newest | best
@@ -104,21 +106,21 @@ export default function JobList({ defaultIndustry = 'SE' }) {
   return (
     <div className="joblist-root">
       <div className="joblist-header">
-        <h2 className="joblist-title">Internship Opportunities</h2>
+        <h2 className="joblist-title">{t('jobs_title') || 'Internship Opportunities'}</h2>
         <div className="joblist-controls">
           <button
             className="jl-bookmark-btn"
             onClick={() => setShowBookmarks(s => !s)}
-            title="View bookmarked jobs"
+            title={t('jobs_bookmark_tooltip') || 'View bookmarked jobs'}
           >
-            Bookmark
+            {t('jobs_bookmark') || 'Bookmark'}
             {bookmarkedIds.length > 0 && (
               <span className="jl-bookmark-count">{bookmarkedIds.length}</span>
             )}
           </button>
           <input
             className="jl-input"
-            placeholder="Search company, title, location..."
+            placeholder={t('jobs_search_placeholder') || 'Search company, title, location...'}
             value={query}
             onChange={(e) => setQuery(e.target.value)}
           />
@@ -127,7 +129,7 @@ export default function JobList({ defaultIndustry = 'SE' }) {
             value={industry}
             onChange={(e) => setIndustry(e.target.value)}
           >
-            <option value="">All</option>
+            <option value="">{t('jobs_all_majors') || 'All'}</option>
             <option value="SE">SE</option>
             <option value="FE">FE</option>
             <option value="IB">IB</option>
@@ -137,14 +139,16 @@ export default function JobList({ defaultIndustry = 'SE' }) {
             <button
               className={sortMode === 'newest' ? 'active' : ''}
               onClick={() => setSortMode('newest')}
-            >Newest</button>
+            >{t('jobs_sort_newest') || 'Newest'}</button>
             <button
               className={sortMode === 'best' ? 'active' : ''}
               onClick={() => setSortMode('best')}
-            >Best Match</button>
+            >{t('jobs_sort_best') || 'Best Match'}</button>
           </div>
           <button className="jl-refresh" onClick={handleRefresh} disabled={isRefreshing}>
-            {isRefreshing ? 'Updating...' : 'Update'}
+            {isRefreshing 
+              ? (t('jobs_updating') || 'Updating...') 
+              : (t('jobs_update') || 'Update')}
           </button>
         </div>
       </div>
@@ -153,20 +157,22 @@ export default function JobList({ defaultIndustry = 'SE' }) {
       {showBookmarks && (
         <div className="bookmark-panel">
           <div className="bp-header">
-            <h3>Bookmarks</h3>
-            <button className="bp-close" onClick={() => setShowBookmarks(false)}>Close</button>
+            <h3>{t('jobs_bookmarks') || 'Bookmarks'}</h3>
+            <button className="bp-close" onClick={() => setShowBookmarks(false)}>
+              {t('close') || 'Close'}
+            </button>
           </div>
           {bookmarkedJobs.length === 0 ? (
-            <div className="bp-empty">No saved jobs yet.</div>
+            <div className="bp-empty">{t('jobs_empty_bookmarks') || 'No saved jobs yet.'}</div>
           ) : (
             <table className="bp-table">
               <thead>
                 <tr>
-                  <th>Company</th>
-                  <th>Role</th>
-                  <th>Location</th>
-                  <th>Status</th>
-                  <th>Actions</th>
+                  <th>{t('admin_company_name') || 'Company'}</th>
+                  <th>{t('jobs_role') || 'Role'}</th>
+                  <th>{t('jobs_location') || 'Location'}</th>
+                  <th>{t('cv_apps_status') || 'Status'}</th>
+                  <th>{t('admin_actions') || 'Actions'}</th>
                 </tr>
               </thead>
               <tbody>
@@ -179,20 +185,28 @@ export default function JobList({ defaultIndustry = 'SE' }) {
                       <td>{job.location}</td>
                       <td>
                         <span className={`status-badge ${status}`}>
-                          {status === 'applied' ? 'Applied' : status === 'waiting' ? 'Waiting for response' : 'Chưa applied'}
+                          {status === 'applied'
+                            ? (t('jobs_status_applied') || 'Applied')
+                            : status === 'waiting'
+                              ? (t('jobs_status_waiting') || 'Waiting for response')
+                              : (t('jobs_status_none') || 'Not applied')}
                         </span>
                       </td>
                       <td className="bp-actions">
-                        <button className="bp-unsave" onClick={() => toggleBookmark(job.id)}>Bỏ lưu</button>
-                        <Link className="bp-detail" to={`/jobs/${job.id}`}>Detail</Link>
+                        <button className="bp-unsave" onClick={() => toggleBookmark(job.id)}>
+                          {t('jobs_unsave') || 'Unsave'}
+                        </button>
+                        <Link className="bp-detail" to={`/jobs/${job.id}`}>
+                          {t('detail') || 'Detail'}
+                        </Link>
                         <select
                           className="bp-status-select"
                           value={applyStatus[job.id] || 'none'}
                           onChange={(e) => setApplyStatus(prev => ({ ...prev, [job.id]: e.target.value }))}
                         >
-                          <option value="none">Chưa applied</option>
-                          <option value="waiting">Waiting for response</option>
-                          <option value="applied">Applied</option>
+                          <option value="none">{t('jobs_status_none') || 'Not applied'}</option>
+                          <option value="waiting">{t('jobs_status_waiting') || 'Waiting for response'}</option>
+                          <option value="applied">{t('jobs_status_applied') || 'Applied'}</option>
                         </select>
                       </td>
                     </tr>
