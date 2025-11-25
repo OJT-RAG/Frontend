@@ -12,6 +12,6 @@
  .pg-controls button:disabled{opacity:.4;cursor:not-allowed}
  .download-btn{padding:.55rem .7rem;border:2px solid #a86a2c;background:#fff;color:#a86a2c;font-weight:800;border-radius:8px;cursor:pointer;font-size:.8rem}
  .download-btn:hover{background:#fff6e6}
- .ojt-viewer{flex:1;padding:1.25rem 1.5rem;overflow:auto}
+ .ojt-viewer{flex:1;padding:1.25rem 1.5rem;overflow:auto;display:flex;justify-content:center;align-items:flex-start}
  .ojt-loading{padding:2rem;text-align:center;color:#666}
  @media (max-width:900px){.ojt-page{flex-direction:column}.ojt-sidebar{width:100%;flex:none;display:grid;grid-template-columns:1fr 1fr;gap:.75rem}.ojt-nav{grid-column:1 / -1;flex-direction:row;align-items:center}.pg-controls{flex:1}}

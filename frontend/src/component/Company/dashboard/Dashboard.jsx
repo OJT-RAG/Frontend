@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import Sidebar from "./Sidebar";
-import ChatPanel from "./ChatPanel";
-import PdfManager from "../pdf/pdfManager";
-import FinalReportPage from "../StudentsReport/FinalReportPage";
+import Sidebar from "./Sidebar.jsx";
+import ChatPanel from "./ChatPanel.jsx";
+import PdfManager from "../../pages/pdf/pdfManager.jsx";
+import FinalReportPage from "../StudentsReport/FinalReportPage.jsx";
 import "./Dashboard.css";
 import UpdateUserPage from "../userProfile/UpdateUserPage.jsx";
 

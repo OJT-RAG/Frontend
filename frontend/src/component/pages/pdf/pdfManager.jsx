@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { Document, Page } from 'react-pdf';
-import * as pdfjsLib from 'pdfjs-dist';
+import { Document, Page, pdfjs } from 'react-pdf';
 // Text/annotation layers disabled below so CSS not needed
 import './pdfManager.css';
 
@@ -12,8 +11,8 @@ const SAMPLE_PDF_URL = samplePdf;
 // ----------------------------------------------------
 
 
-// Configure worker explicitly to ensure CRA resolves it
-pdfjsLib.GlobalWorkerOptions.workerSrc = new URL('pdfjs-dist/build/pdf.worker.min.mjs', import.meta.url).toString();
+// Configure worker via react-pdf's pdfjs wrapper
+pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
 const PdfManager = () => {
   const [numPages, setNumPages] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
@@ -85,7 +84,7 @@ const PdfManager = () => {
       )}
 
       {/* Vùng hiển thị PDF */}
-      <div className="pdf-viewer-container" style={{ border: '1px solid #ccc', overflow: 'auto', maxHeight: '70vh', textAlign: 'center' }}>
+      <div className="pdf-viewer-container" style={{ border: '1px solid #ccc', overflow: 'auto', maxHeight: '70vh', display: 'flex', justifyContent: 'center', alignItems: 'flex-start' }}>
         <Document
           file={SAMPLE_PDF_URL}
           onLoadSuccess={onDocumentLoadSuccess}

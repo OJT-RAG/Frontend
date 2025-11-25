@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
-import { Document, Page } from 'react-pdf';
-import * as pdfjsLib from 'pdfjs-dist';
+import { Document, Page, pdfjs } from 'react-pdf';
 import './OJT.scss';
 
 import introPdf from '../../assets/GIỚI THIỆU VỀ CHƯƠNG TRÌNH HỌC KỲ OJT FPTU (ON-THE-JOB-TRAINING).pdf';
 import guidePdf from '../../assets/TÀI LIỆU HƯỚNG DẪN SV OJT KỲ SPRING 2026.pdf';
 
-// Configure pdf.js worker explicitly for CRA/Webpack
-pdfjsLib.GlobalWorkerOptions.workerSrc = new URL('pdfjs-dist/build/pdf.worker.min.mjs', import.meta.url).toString();
+// Configure pdf.js worker via react-pdf's pdfjs wrapper
+pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
 
 const docs = [
 	{ id: 'intro', title: 'Giới thiệu chương trình OJT FPTU', file: introPdf },
