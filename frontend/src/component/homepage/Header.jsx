@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Languages, User, MessageSquare, BookOpen, Briefcase, Home } from "lucide-react";
+import { Languages, User, MessageSquare, BookOpen, Briefcase, Home, Shield } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { useI18n } from "../../i18n/i18n.jsx";
 import "./Header.css";
@@ -54,6 +54,10 @@ const Header = () => {
           </Link>
           <Link to='/jobs' className={`nav-btn ${isActive('/jobs') ? 'active' : ''}`}>
             <Briefcase /> <span>Jobs</span>
+            <span className="line" aria-hidden="true"></span>
+          </Link>
+          <Link to='/admin' className={`nav-btn ${isActive('/admin') ? 'active' : ''}`}>
+            <Shield /> <span>Admin</span>
             <span className="line" aria-hidden="true"></span>
           </Link>
         </nav>

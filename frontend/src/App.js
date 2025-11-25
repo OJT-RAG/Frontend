@@ -10,6 +10,8 @@ import HomePage from './component/homepage/HomePage';
 import Dashboard from './component/Company/dashboard/Dashboard';
 import OJT from './component/pages/pdf/OJT';
 import Header from './component/homepage/Header';
+import AdminDashboard from './component/Admin/AdminDashboard';
+
 function App() {
   return (
     <Router>
@@ -20,11 +22,12 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/forgot" element={<ForgotPassword />} />
         <Route path="/homepage" element={<HomePage />} />
-  <Route path="/profile/cv" element={<CV />} />
-  <Route path="/jobs" element={<JobList />} />
-  <Route path="/jobs/:id" element={<JobDetail />} />
-      <Route path="/ojt" element={<OJT />} />
+        <Route path="/profile/cv" element={<CV />} />
+        <Route path="/jobs" element={<JobList />} />
+        <Route path="/jobs/:id" element={<JobDetail />} />
+        <Route path="/ojt" element={<OJT />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/admin" element={<AdminDashboard />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </Router>
