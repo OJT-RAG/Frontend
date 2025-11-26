@@ -11,7 +11,7 @@ import Dashboard from './component/Company/dashboard/Dashboard';
 import OJT from './component/pages/pdf/OJT';
 import Header from './component/homepage/Header';
 import AdminDashboard from './component/Admin/AdminDashboard';
-
+import CompanyRepLayout from './component/pages/companyRep/CompanyRepLayout';
 function App() {
   return (
     <Router>
@@ -28,6 +28,7 @@ function App() {
         <Route path="/ojt" element={<OJT />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/admin" element={<AdminDashboard />} />
+        <Route path="/company/*" element={<CompanyRepLayout />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </Router>

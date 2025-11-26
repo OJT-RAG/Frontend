@@ -60,6 +60,10 @@ const Header = () => {
             <Shield /> <span>{t('nav_admin') || 'Admin'}</span>
             <span className="line" aria-hidden="true"></span>
           </Link>
+          <Link to='/company' className={`nav-btn ${isActive('/company') ? 'active' : ''}`}>
+            <Shield /> <span>{t('Company') || 'Company'}</span>
+            <span className="line" aria-hidden="true"></span>
+          </Link>
         </nav>
 
         <div className="actions">
