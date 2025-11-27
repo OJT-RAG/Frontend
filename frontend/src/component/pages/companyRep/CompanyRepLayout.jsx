@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Layout } from "antd";
 import Sidebar from "./CompanySidebar";
 import CompanyRepDashboard from "./Dashboard/CompanyDashboard";
-
+import JobManagement from "./JobManage/JobManagement";
 const { Sider, Content } = Layout;
 
 const CompanyRepLayout = () => {
@@ -20,7 +20,7 @@ const CompanyRepLayout = () => {
 
       <div style={{ flex: 1, padding: "20px" }}>
         {activeModule === "dashboard" && <CompanyRepDashboard />}
-        {activeModule === "jobs" && <div>Job Management Page</div>}
+        {activeModule === "jobs" && <div><JobManagement /></div>}
         {activeModule === "applicants" && <div>Applicants Page</div>}
         {activeModule === "documents" && <div>Company Documents Page</div>}
         {activeModule === "students" && <div>Students OJT Page</div>}
