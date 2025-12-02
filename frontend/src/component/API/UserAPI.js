@@ -7,6 +7,10 @@ const userApi = {
 
   // Lấy thông tin user theo ID
   getById: (userId) => httpClient.get(`/user/${userId}`),
+
+  getAll: () => httpClient.get("/user/getAll"),
+
+  create: (data) => httpClient.post("/user/create", data),
 };
 
 export default userApi;

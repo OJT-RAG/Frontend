@@ -7,11 +7,11 @@ import JobList from './component/profile/Joblist';
 import JobDetail from './component/profile/Jobdetail';
 import './component/login/Login.scss';
 import HomePage from './component/homepage/HomePage';
-import Dashboard from './component/Company/dashboard/Dashboard';
+import Dashboard from './component/Students/dashboard/Dashboard.jsx';
 import OJT from './component/pages/pdf/OJT';
 import Header from './component/homepage/Header';
 import AdminDashboard from './component/Admin/AdminDashboard';
-import CompanyRepLayout from './component/pages/companyRep/CompanyRepLayout';
+import CompanyRepLayout from './component/companyRep/CompanyRepLayout';
 function App() {
   return (
     <Router>
