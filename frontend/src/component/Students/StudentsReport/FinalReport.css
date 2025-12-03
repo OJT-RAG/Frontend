@@ -1,64 +1,68 @@
-/* Container chính của Form */
-.final-report-container {
-    max-width: 900px;
-    margin: 40px auto;
-    padding: 30px;
-    background-color: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+.final-report-wrapper {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
-/* Tiêu đề Form */
 .final-report-header {
-    text-align: center;
-    margin-bottom: 30px;
-    color: #1890ff; /* Màu chính của Ant Design */
-    border-bottom: 2px solid #f0f0f0;
-    padding-bottom: 15px;
-    font-size: 24px;
-    font-weight: 600;
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
 }
 
-/* Layout lưới cho các trường định danh (3 cột) */
-.form-grid-3 {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+.file-info {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0.5rem 0 1rem;
 }
 
-/* Layout lưới cho phần đánh giá (2 cột) */
-.form-grid-2 {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
+.content-container {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
 }
 
-/* Đảm bảo InputNumber và các Input khác chiếm toàn bộ chiều rộng của Form.Item */
-.full-width {
-    width: 100% !important;
+.left-panel {
+  flex: 1;
+  min-width: 300px;
 }
 
-/* Nút Submit */
-.submit-group {
-    margin-top: 30px;
-    text-align: right;
+.right-panel {
+  flex: 1;
+  min-width: 300px;
+  height: 600px;
+  background: #f7f7f7;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  overflow: hidden;
 }
 
-.submit-button {
-    width: 100%;
-    height: 40px;
-    font-weight: bold;
-    font-size: 16px;
+.pdf-viewer {
+  width: 100%;
+  height: 100%;
 }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    .final-report-container {
-        margin: 20px 10px;
-        padding: 20px;
-    }
-    
-    .form-grid-3, .form-grid-2 {
-        grid-template-columns: 1fr; /* Chuyển sang layout 1 cột trên thiết bị nhỏ */
-    }
+.empty-viewer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  color: #999;
+  font-style: italic;
+}
+
+.submit-btn {
+  margin-top: 1rem;
+}
+
+@media (max-width: 900px) {
+  .content-container {
+    flex-direction: column;
+  }
+
+  .right-panel {
+    height: 400px;
+  }
 }
