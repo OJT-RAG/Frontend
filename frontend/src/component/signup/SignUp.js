@@ -20,6 +20,9 @@ function SignUp() {
   const [majors, setMajors] = useState([]);
   const [majorsLoading, setMajorsLoading] = useState(false);
   const [majorsError, setMajorsError] = useState('');
+  const [companies, setCompanies] = useState([]);
+  const [companiesLoading, setCompaniesLoading] = useState(false);
+  const [companiesError, setCompaniesError] = useState('');
   const [submitting, setSubmitting] = useState(false);
   const navigate = useNavigate();
   const { t } = useI18n();
@@ -69,8 +72,49 @@ function SignUp() {
     return () => { cancelled = true; };
   };
 
+  const loadCompanies = async () => {
+    let cancelled = false;
+    setCompaniesError('');
+    setCompaniesLoading(true);
+    const endpoint = process.env.REACT_APP_COMPANY_GETALL || '/api/Company/getAll';
+    const base = (process.env.REACT_APP_API_BASE_URL || 'http://localhost:5220').replace(/\/$/, '');
+    const url = `${base}${endpoint}`;
+    try {
+      const res = await fetch(url, { headers: { accept: 'application/json' } });
+      const ct = res.headers.get('content-type') || '';
+      if (!ct.includes('application/json')) {
+        const text = await res.text().catch(() => '');
+        throw new Error(`Non-JSON (${ct || 'unknown'}) @ ${url} :: ${text.slice(0,180)}`);
+      }
+      const json = await res.json();
+      if (!res.ok) {
+        const msg = json && json.message ? ` - ${json.message}` : '';
+        throw new Error(`HTTP ${res.status}${msg} @ ${url}`);
+      }
+      const list = Array.isArray(json?.data) ? json.data : Array.isArray(json) ? json : [];
+      const normalized = list
+        .map((c) => {
+          const id = c?.company_ID ?? c?.Company_ID ?? c?.companyId ?? c?.CompanyId ?? c?.id ?? c?.Id;
+          const name = c?.name ?? c?.Name;
+          if (id == null) return null;
+          return { id: String(id), name: name ? String(name) : String(id) };
+        })
+        .filter(Boolean);
+      if (!cancelled) setCompanies(normalized);
+    } catch (e) {
+      // eslint-disable-next-line no-console
+      console.error('Failed to load companies', e);
+      setCompaniesError(e?.message || 'Failed to load companies');
+      if (!cancelled) setCompanies([]);
+    } finally {
+      if (!cancelled) setCompaniesLoading(false);
+    }
+    return () => { cancelled = true; };
+  };
+
   useEffect(() => {
     loadMajors();
+    loadCompanies();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -178,7 +222,27 @@ function SignUp() {
             </button>
           </div>
         )}
-        <input name="companyId" type="number" placeholder={t('company')} value={form.companyId} onChange={onChange} aria-label={t('company')} />
+        <select name="companyId" value={form.companyId} onChange={onChange} aria-label={t('company')} required>
+          <option value="" disabled>{companiesLoading ? t('loading') : t('company')}</option>
+          {companies.map((c, idx) => {
+            const id = (c && typeof c === 'object') ? c.id : (c != null ? String(c) : String(idx));
+            const label = (c && typeof c === 'object') ? (c.name || id) : (c != null ? String(c) : id);
+            return (
+              <option key={`${id}-${idx}`} value={id}>{label}</option>
+            );
+          })}
+          {!companiesLoading && companies.length === 0 && (
+            <option value="" disabled>(No companies found)</option>
+          )}
+        </select>
+        {companiesError && (
+          <div style={{ fontSize: '12px', color: '#b94a48', marginTop: '6px' }}>
+            {companiesError}
+            <button type="button" onClick={loadCompanies} style={{ marginLeft: 8 }} disabled={companiesLoading}>
+              {companiesLoading ? t('loading') : 'Reload Companies'}
+            </button>
+          </div>
+        )}
 
         <input name="avatarUrl" placeholder={t('avatar_url')} value={form.avatarUrl} onChange={onChange} aria-label={t('avatar_url')} />
         <input name="cvUrl" placeholder={t('cv_url')} value={form.cvUrl} onChange={onChange} aria-label={t('cv_url')} />
