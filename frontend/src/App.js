@@ -12,7 +12,7 @@ import OJT from './component/pages/pdf/OJT';
 import Header from './component/homepage/Header';
 import AdminDashboard from './component/Admin/AdminDashboard';
 import CompanyRepLayout from './component/companyRep/CompanyRepLayout';
-import AIChat from './component/Students/dashboard/ChatQA/ChatModule.jsx';
+import AIChat from './component/Students/dashboard/ChatQA/ChatPage.jsx';
 function App() {
   return (
     <Router>
