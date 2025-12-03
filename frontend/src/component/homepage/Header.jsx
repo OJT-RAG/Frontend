@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Languages, User, MessageSquare, BookOpen, Briefcase, Home, Shield } from "lucide-react";
+import { Languages, User, MessageSquare, BookOpen, Home, Shield } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { useI18n } from "../../i18n/i18n.jsx";
 import "./Header.css";
@@ -10,7 +10,6 @@ const Header = () => {
   const [role, setRole] = useState(localStorage.getItem("userRole") || "guest");
   const { lang, setLang, t } = useI18n();
   const languageCode = (lang || "en").toUpperCase().slice(0, 2);
-  const iconSize = 16;
 
   // Cập nhật khi login/logout thay đổi localStorage
   useEffect(() => {
@@ -50,10 +49,6 @@ const Header = () => {
           </Link>
           <Link to='/dashboard' className={`nav-btn ${isActive('/dashboard') ? 'active' : ''}`}>
             <User /> <span>{t("nav_dashboard")}</span>
-            <span className="line" aria-hidden="true"></span>
-          </Link>
-          <Link to='/jobs' className={`nav-btn ${isActive('/jobs') ? 'active' : ''}`}>
-            <Briefcase /> <span>{t('nav_jobs') || 'Jobs'}</span>
             <span className="line" aria-hidden="true"></span>
           </Link>
           <Link to='/admin' className={`nav-btn ${isActive('/admin') ? 'active' : ''}`}>
