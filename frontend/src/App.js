@@ -12,6 +12,7 @@ import OJT from './component/pages/pdf/OJT';
 import Header from './component/homepage/Header';
 import AdminDashboard from './component/Admin/AdminDashboard';
 import CompanyRepLayout from './component/companyRep/CompanyRepLayout';
+import AIChat from './component/Students/dashboard/ChatQA/ChatModule.jsx';
 function App() {
   return (
     <Router>
@@ -29,6 +30,7 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/admin" element={<AdminDashboard />} />
         <Route path="/company/*" element={<CompanyRepLayout />} />
+        <Route path="/qa" element={<AIChat />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </Router>

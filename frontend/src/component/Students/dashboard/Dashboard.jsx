@@ -1,40 +1,40 @@
 import React, { useState } from "react";
 import Sidebar from "./Sidebar.jsx";
-import ChatPanel from "./ChatPanel.jsx";
 import PdfManager from "../../pages/pdf/pdfManager.jsx";
 import FinalReportPage from "../StudentsReport/FinalReportPage.jsx";
-import "./Dashboard.css";
 import UpdateUserPage from "../userProfile/UpdateUserPage.jsx";
+import JobsPage from "../../profile/Joblist.jsx"
+import "./Dashboard.css";
 
 const Dashboard = () => {
-  // 👈 Thêm state để theo dõi module đang hoạt động
-  const [activeModule, setActiveModule] = useState("chat"); 
+  // Mặc định module PDF active
+  const [activeModule, setActiveModule] = useState("pdf"); 
 
-  // Hàm render nội dung tương ứng
+  // Render nội dung module tương ứng
   const renderContent = () => {
     switch (activeModule) {
-      case "chat":
-        return <ChatPanel />;
       case "pdf":
-        return <PdfManager />; // 👈 Hiển thị PdfManager
+        return <PdfManager />; 
       case "finalreport":
-        return <FinalReportPage />; // 👈 Hiển thị PdfManager  
+        return <FinalReportPage />; 
       case "updateuser":
-        return <UpdateUserPage/>; 
+        return <UpdateUserPage />;
+      case "jobs":
+        return <div><JobsPage/></div>; 
       case "settings":
-        return <div>Nội dung Cài đặt sẽ ở đây...</div>; // Tạm thời
+        return <div>Nội dung Cài đặt sẽ ở đây...</div>; 
       default:
-        return <ChatPanel />;
+        return <PdfManager />; 
     }
   };
 
   return (
     <div className="dashboard-root">
       <div className="dashboard-container">
-        {/* 👈 Truyền state và hàm set state vào Sidebar */}
+        {/* Truyền state và hàm set state vào Sidebar */}
         <Sidebar activeModule={activeModule} setActiveModule={setActiveModule} />
         <div className="dashboard-content">
-          {/* 👈 Gọi hàm để render nội dung động */}
+          {/* Render nội dung module tương ứng */}
           {renderContent()}
         </div>
       </div>
