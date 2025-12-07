@@ -2,6 +2,16 @@ import React, { useState, useRef, useEffect } from "react";
 import "./ChatPage.css";
 
 const ChatPage = () => {
+  useEffect(() => {
+    // Khi vào ChatPage → khóa scroll toàn trang
+    document.body.classList.add("no-scroll");
+
+    // Khi rời ChatPage → trả lại như cũ
+    return () => {
+      document.body.classList.remove("no-scroll");
+    };
+  }, []);
+
   const [sessions, setSessions] = useState([
     { id: 1, title: "Session 1", messages: [{ sender: "ai", text: "Xin chào!" }] },
     { id: 2, title: "Session 2", messages: [{ sender: "ai", text: "Chào mừng bạn!" }] },
@@ -10,7 +20,6 @@ const ChatPage = () => {
   const [input, setInput] = useState("");
 
   const messagesEndRef = useRef(null);
-
   const activeSession = sessions.find((s) => s.id === activeSessionId);
 
   const scrollToBottom = () => {
@@ -24,30 +33,26 @@ const ChatPage = () => {
   const handleSend = () => {
     if (!input.trim()) return;
 
-    const updatedSessions = sessions.map((s) => {
-      if (s.id === activeSessionId) {
-        return {
-          ...s,
-          messages: [...s.messages, { sender: "user", text: input }],
-        };
-      }
-      return s;
-    });
+    const updated = sessions.map((s) =>
+      s.id === activeSessionId
+        ? { ...s, messages: [...s.messages, { sender: "user", text: input }] }
+        : s
+    );
 
-    setSessions(updatedSessions);
+    setSessions(updated);
+    const sent = input;
     setInput("");
 
     setTimeout(() => {
       setSessions((prev) =>
-        prev.map((s) => {
-          if (s.id === activeSessionId) {
-            return {
-              ...s,
-              messages: [...s.messages, { sender: "ai", text: `Bạn vừa nói: "${input}"` }],
-            };
-          }
-          return s;
-        })
+        prev.map((s) =>
+          s.id === activeSessionId
+            ? {
+                ...s,
+                messages: [...s.messages, { sender: "ai", text: `Bạn vừa nói: "${sent}"` }],
+              }
+            : s
+        )
       );
     }, 1000);
   };
@@ -65,6 +70,7 @@ const ChatPage = () => {
         <button className="new-session-btn" onClick={createNewSession}>
           + New Session
         </button>
+
         <div className="session-list">
           {sessions.map((s) => (
             <div
@@ -85,6 +91,7 @@ const ChatPage = () => {
               {msg.text}
             </div>
           ))}
+
           <div ref={messagesEndRef} />
         </div>
 

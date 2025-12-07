@@ -7,8 +7,12 @@
 html, body {
   height: 100%;
   width: 100%;
-  overflow: hidden; /* page không scroll */
   font-family: sans-serif;
+}
+
+/* ❗ Chỉ ChatPage mới dùng class này để khóa scroll */
+body.no-scroll {
+  overflow: hidden !important;
 }
 
 /* ---------------- Header ---------------- */
@@ -35,9 +39,9 @@ html, body {
 /* ---------------- ChatPage ---------------- */
 .chatpage-full {
   display: flex;
-  height: calc(100vh - 68px); /* trừ header */
-  width: 100vw;
-  margin-top: 68px; /* đẩy container xuống dưới header */
+  height: calc(100vh - 68px);
+  width: 100%;
+  margin-top: 68px;
   overflow: hidden;
 }
 
@@ -53,7 +57,7 @@ html, body {
 
 .new-session-btn {
   position: sticky;
-  top: 10px; /* luôn nhìn thấy khi scroll sidebar */
+  top: 10px;
   padding: 10px;
   margin-bottom: 15px;
   border: none;
@@ -62,12 +66,12 @@ html, body {
   color: white;
   cursor: pointer;
   font-weight: bold;
-  z-index: 51; /* > header */
+  z-index: 51;
 }
 
 .session-list {
   flex: 1;
-  overflow-y: auto; /* scroll nếu danh sách dài */
+  overflow-y: auto;
 }
 
 .session-item {
@@ -87,10 +91,9 @@ html, body {
   flex: 1;
   display: flex;
   flex-direction: column;
-  min-height: 0; /* để messages scroll đúng */
+  min-height: 0;
 }
 
-/* Messages */
 .chatpage-messages {
   flex: 1;
   padding: 15px;
@@ -99,10 +102,9 @@ html, body {
   flex-direction: column;
   gap: 10px;
   background-color: #fafafa;
-  min-height: 0; /* rất quan trọng để scroll hoạt động */
+  min-height: 0;
 }
 
-/* Chat bubbles */
 .chat-bubble {
   padding: 12px 18px;
   border-radius: 20px;
@@ -125,7 +127,7 @@ html, body {
 
 /* Input */
 .chatpage-input {
-  flex-shrink: 0; /* không bị co lại */
+  flex-shrink: 0;
   display: flex;
   padding: 10px;
   border-top: 1px solid #ddd;
