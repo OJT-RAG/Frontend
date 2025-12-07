@@ -11,6 +11,8 @@ const userApi = {
   getAll: () => httpClient.get("/user/getAll"),
 
   create: (data) => httpClient.post("/user/create", data),
+
+  login: (data) => httpClient.post("/user/login", data),  
 };
 
 export default userApi;
