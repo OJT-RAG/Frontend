@@ -43,6 +43,10 @@ const Header = () => {
             <MessageSquare /> <span>{t("nav_qa")}</span>
             <span className="line" aria-hidden="true"></span>
           </Link>
+          <Link to='/ragdocs' className={`nav-btn ${isActive('/ragdocs') ? 'active' : ''}`}>
+            <BookOpen /> <span>{t('nav_rag_docs') || 'RAGdocs-Manage'}</span>
+            <span className="line" aria-hidden="true"></span>
+          </Link>
           <Link to='/ojt' className={`nav-btn ${isActive('/ojt') ? 'active' : ''}`}>
             <BookOpen /> <span>{t('nav_ojt_docs') || 'OJT Docs'}</span>
             <span className="line" aria-hidden="true"></span>

@@ -13,6 +13,7 @@ import Header from './component/homepage/Header';
 import AdminDashboard from './component/Admin/AdminDashboard';
 import CompanyRepLayout from './component/companyRep/CompanyRepLayout';
 import AIChat from './component/Students/dashboard/ChatQA/ChatPage.jsx';
+import OJTdocsAdmin from './component/AIchatbot/OJTdocsAdmin.jsx';
 function App() {
   return (
     <Router>
@@ -27,6 +28,7 @@ function App() {
         <Route path="/jobs" element={<JobList />} />
         <Route path="/jobs/:id" element={<JobDetail />} />
         <Route path="/ojt" element={<OJT />} />
+        <Route path="/ragdocs" element={<OJTdocsAdmin />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/admin" element={<AdminDashboard />} />
         <Route path="/company/*" element={<CompanyRepLayout />} />
