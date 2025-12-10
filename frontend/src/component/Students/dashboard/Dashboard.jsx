@@ -34,8 +34,10 @@ const Dashboard = () => {
         {/* Truyền state và hàm set state vào Sidebar */}
         <Sidebar activeModule={activeModule} setActiveModule={setActiveModule} />
         <div className="dashboard-content">
-          {/* Render nội dung module tương ứng */}
-          {renderContent()}
+          <div className="dashboard-surface">
+            {/* Render nội dung module tương ứng */}
+            {renderContent()}
+          </div>
         </div>
       </div>
     </div>
