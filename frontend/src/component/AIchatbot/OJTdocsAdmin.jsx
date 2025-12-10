@@ -1,4 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
+import Toastify from "toastify-js";
+import "toastify-js/src/toastify.css";
 import "./OJTdocsAdmin.scss";
 
 const DEFAULT_RAG_BASE = "https://ojt-rag-python.onrender.com";
@@ -73,6 +75,18 @@ const OJTdocsAdmin = () => {
 			}
 			setGcsUri("");
 			await loadFiles();
+			Toastify({
+				text: "Upload tài liệu thành công",
+				duration: 1000,
+				gravity: "top",
+				position: "right",
+				close: true,
+				style: {
+					background: "#16a34a",
+					color: "#fff",
+					fontWeight: "700",
+				},
+			}).showToast();
 		} catch (err) {
 			setError(err.message || "Failed to import PDF");
 		} finally {
